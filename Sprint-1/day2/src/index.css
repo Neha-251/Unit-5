@@ -11,3 +11,57 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+#nav{
+  height: 60px;
+  margin: 0ch;
+  width:100%;
+  background-color: rgb(36,37,42);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  
+}
+
+#logo{
+  text-align: center;
+  color: whitesmoke;
+  height: 50px;
+  width:120px;
+  font-size: 25px;
+  margin-bottom:10px;
+  border: 1px solid transparent;
+}
+
+#logo > p{
+  margin-top:10px;
+  margin-left: 30px;
+  font-weight: 600;
+}
+
+#options{
+  color: whitesmoke;
+  display: flex;
+  border: 1px solid transparent;
+  margin-left: 450px;
+  
+}
+
+.neha{
+  width: 120px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+#btn{
+  height: 40px;
+  width: 100px;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: 360px;
+  border-radius: 20px;
+  background: rgb(38, 105, 182);
+  color: white;
+  border: none;
+}

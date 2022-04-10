@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 function App() {
+  const arrLink = ["Services", "Projects", "About"];
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <nav id="nav">
+      <div id="logo">
+        <p>LogoBakery</p>
+      </div>
+
+      <div id="options">
+      
+        {arrLink.map((e) => {
+          return <Name op = {e} />;
+        })}
+      </div>
+
+      <button id="btn">Contact</button>
+    </nav>
   );
+}
+
+function Name({op}) {
+  return <div className="neha">{op}</div>
 }
 
 export default App;
