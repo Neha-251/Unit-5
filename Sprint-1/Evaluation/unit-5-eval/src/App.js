@@ -80,7 +80,7 @@ function App() {
       </div>
       <div className="div2">
         <div className="addScore">
-          <div className="addScore">Add Score:</div>
+          <div>Add Score:</div>
           <button className="addOne" onClick={() => {
             handleScore(1);
           }}>Add 1</button>
