@@ -11,3 +11,83 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.App{
+  height:auto;
+  width: 900px;
+  padding: 30px;
+  margin:auto;
+  border: 1px solid skyblue;
+}
+
+.india{
+  color: blue;
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+.scoreboard{
+  display:flex;
+  gap: 210px;
+  font-size:40px;
+}
+
+
+
+.addScore{
+  display: flex;
+  font-size: 30px;
+  margin-top:50px;
+}
+
+.addScore > button{
+  background-color: white;
+  border: 2px solid blue;
+  height: 40px;
+  width:100px;
+  font-size:25px;
+  margin-top: 50px;
+  margin-left:50px;
+
+}
+
+.addWicket{
+  display: flex;
+  font-size: 30px;
+  margin-top:50px;
+}
+
+.addWicket > button{
+  background-color: white;
+  border: 2px solid blue;
+  height: 40px;
+  width:100px;
+  font-size:25px;
+  /* margin-top: 50px; */
+  margin-left:50px;
+
+}
+
+.addBall{
+  display: flex;
+  font-size: 30px;
+  margin-top:50px;
+}
+
+.addBall > button{
+  background-color: white;
+  border: 2px solid blue;
+  height: 40px;
+  width:100px;
+  font-size:25px;
+  /* margin-top: 50px; */
+  margin-left:50px;
+
+}
+
+.status{
+  color: crimson;
+  font-size: 60px;
+}
