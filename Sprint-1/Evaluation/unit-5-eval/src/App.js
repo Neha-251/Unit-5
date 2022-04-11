@@ -11,23 +11,36 @@ function App() {
 
 
   const handleScore = (value) => {
-    setscorecount(scorecount + value);
+    if(scorecount < 100){
+      setscorecount(scorecount + value);
+    }
+    else {
+      setscorecount(scorecount);
+    }
+    
   }
 
   const handleWicket = (value) => {
-    if(wicketcount < 12){
-      setwicketcount(wicketcount + value);
-    } else {
+    if(scorecount < 100){
+      if(wicketcount < 12){
+        setwicketcount(wicketcount + value);
+      } else {
+        setwicketcount(wicketcount);
+      }
+    }
+    else {
       setwicketcount(wicketcount);
     }
     
   }
 
   const handleBall = (value) => {
-    if(scorecount > 100){
-      
+    if(scorecount < 100){
+      setballcount(ballcount + value);
     }
-    setballcount(ballcount + value);
+    else {
+      setballcount(ballcount);
+    }
   }
 
   
