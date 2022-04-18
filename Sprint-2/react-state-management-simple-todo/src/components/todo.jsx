@@ -2,6 +2,7 @@ import React from "react";
 //import ReactDOM from "react-dom";
 import { useEffect } from "react";
 
+
 const Todoitem = (props) => {
 
   const postCdata = async(title) => {
@@ -25,7 +26,7 @@ const Todoitem = (props) => {
       let res_c = await res.json();
       console.log('res_c', res_c)
 
-
+      window.location.href = "completed.jsx";
     }
     catch(err){
       console.log('err', err)
@@ -34,6 +35,7 @@ const Todoitem = (props) => {
   }
 
   useEffect(() => {
+    
     const getData = async () => {
       try {
         let data = await fetch("https://neha-todo-app.herokuapp.com/todos", {
@@ -54,8 +56,10 @@ const Todoitem = (props) => {
 
     }
     getData();
+
   }, [])
 
+  //console.log(data_get);
 
   const appendData = (data) => {
 
@@ -117,8 +121,11 @@ const Todoitem = (props) => {
       let data_delete = await res.json();
       console.log('data_delete', data_delete);
 
-     // getData();
-     window.location.href = "App.jsx";
+     
+     
+ 
+     
+     //window.location.reload(false);
 
     }
   catch(err) {

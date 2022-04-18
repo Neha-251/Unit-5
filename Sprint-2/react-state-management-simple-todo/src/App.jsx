@@ -29,9 +29,9 @@ function App() {
       let res = await data.json();
       console.log('res', res);
 
-      setTimeout(() => {
-        window.location.href = "App.jsx"
-      }, 10)
+      // setTimeout(() => {
+      //   window.location.href = "App.jsx"
+      // }, 10)
 
     }
     catch (err) {
@@ -86,10 +86,7 @@ function App() {
 
           {<Todoitem />}
 
-
         </div>
-
-
 
       </div>
       
