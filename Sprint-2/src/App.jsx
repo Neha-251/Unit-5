@@ -1,5 +1,5 @@
 import './App.css'
-import {ToDo} from "./components/Todo"
+import {ToDo} from "./components/ToDo"
 
 function App() {
   // const [msg, setMsg] = useState(0)
@@ -13,3 +13,4 @@ function App() {
 }
 
 export default App
+
