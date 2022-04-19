@@ -1,0 +1,43 @@
+
+
+.App{
+    text-align: center;
+    width:400px;
+    height:300px;
+    border: 1px solid gold;
+    margin: 30px auto;
+    font-size: 30px;
+}
+
+
+.btnDiv{
+    margin: 0 auto;
+    
+    width:200px;
+    height:60px;
+}
+
+
+
+.btnreset{
+    background-color: rgb(255, 59, 91);
+    color: rgb(2, 19, 71);
+    border: 0.5px solid rgb(2, 19, 71);
+    font-size: 20px;
+    height: 30px;
+    width:auto;
+    
+
+
+}
+
+.container{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    background-color: rgb(252, 221, 226);
+    margin: 50px auto 0px auto;
+    border: 1px solid black;
+    padding: 10px;
+}
