@@ -1,145 +1,81 @@
 import React from "react";
-//import ReactDOM from "react-dom";
-import { useEffect } from "react";
+import { TodoList } from "./todoList";
+import { useState } from "react";
+import swal from "sweetalert";
 
+const CreateTodo = () => {
 
-const Todoitem = (props) => {
+    const [todo, setTodo] = useState({title: "", done: false})
+    const [todoArr, setTodoArr] = useState([])
 
-  const postCdata = async(title) => {
-    try{
+    let todos = localStorage.hasOwnProperty("todos")? JSON.parse(localStorage.getItem("todos")): []
 
-      let data = {
-        item: title
-      }
-
-      data = JSON.stringify(data);
-
-      let res = await fetch("https://neha-todo-app.herokuapp.com/completedtodos", {
-        method: 'POST',
-        body: data,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json"
-        }
-      })
-
-      let res_c = await res.json();
-      console.log('res_c', res_c)
-
-      window.location.href = "completed.jsx";
+    const onchange = (e) => {
+        let {value} = e.target;
+        let obj = {};
+        obj["title"] = value;
+        obj["done"] = false;
+        setTodo(obj);
     }
-    catch(err){
-      console.log('err', err)
-
-    }
-  }
-
-  useEffect(() => {
     
-    const getData = async () => {
-      try {
-        let data = await fetch("https://neha-todo-app.herokuapp.com/todos", {
-          headers: {
-            "Access-Control-Allow-Origin": "*"
-          }
+   
+    const createTodo = (e) => {
+        const {name} = e.target;
+
+        if(e.key === "Enter" || name === "addTodo"){
+            if(todo.title !== ""){
+                
+                todos.unshift(todo);
+                localStorage.setItem("todos", JSON.stringify(todos));
+                setTodo({ title: "", done: false})
+            }
+            else {
+                swal("Oops!, Please write a todo first", "error")
+            }
+        }
+    }
+
+    const completeTodo = (i) => {
+        if(todos[i]["done"] !== true) {
+            todos[i]["done"] = true;
+            localStorage.setItem("todos", JSON.stringify(todos));
+            setTodoArr(todos)
+            swal("Good job!", "Todo Completed", "success");
+        }
+    }
+
+
+    const deleteTodo = (i) => {
+        swal({
+
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover it",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then(res=> {
+            if(res) {
+                todos.splice(i, 1)
+                localStorage.setItem("todos", JSON.stringify(todos));
+                setTodoArr(todos)
+            }
         })
-
-        let data_get = await data.json();
-        console.log("data_get", data_get);
-
-        appendData(data_get);
-      }
-      catch (error) {
-        console.log('error', error);
-
-      }
-
     }
-    getData();
 
-  }, [])
+    return (
+       <div className="box">
+           <div className="text-end">
+               <h2>React Todo App</h2>
+               <h4>Add a New Todo</h4>
+           </div>
 
-  //console.log(data_get);
-
-  const appendData = (data) => {
-
-    data.forEach((elem) => {
-
-      let mainDiv = document.createElement("div");
-      mainDiv.setAttribute("class", "mainDiv")
-
-      let checkBox = document.createElement("div");
-      checkBox.setAttribute("class", "checkBox");
-
-
-
-      let todoP = document.createElement("p");
-      todoP.setAttribute("class", "todoP");
-
-      todoP.innerText = elem.item;
-
-      let todoInpDiv = document.querySelector(".todoInpDiv");
-
-      mainDiv.append(checkBox, todoP);
-      todoInpDiv.append(mainDiv);
-
-
-      let flag_selected = false;
-
-      checkBox.addEventListener("click", () => {
-        if (flag_selected === false) {
-          console.log(flag_selected);
-          checkBox.innerHTML = "✓";
-          //.setItem("todoId", elem._id);
-          deleteData(elem._id);
-          postCdata(elem.item);
-          todoP.style.textDecoration = "line-through";
-          todoP.style.color = "grey";
-
-          
-        }
-        flag_selected = true;
-      })
-
-      
-
-    })
-  }
-
-
-  const deleteData = async (id) => {
-    try{
-
-      let res = await fetch(`https://neha-todo-app.herokuapp.com/todos/${id}`, {
-        method: "DELETE", 
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json"
-        }
-      })
-
-      let data_delete = await res.json();
-      console.log('data_delete', data_delete);
-
-     
-     
- 
-     
-     //window.location.reload(false);
-
-    }
-  catch(err) {
-    console.log('err', err)
-
-  }
-  }
-
-  return (
-    <div className='todoInpDiv'>
-
-    </div>
-  )
+           <div className="text-addTodo">
+               <input type="text" name="todo" value={todo.title} onKeyPress={createTodo} onChange={onchange} placeholder="Add a new Todo"/>
+               <button className="btn" name="addTodo" onClick={createTodo}>Add</button>
+           </div>
+           <TodoList todoArr={todoArr} completeTodo={completeTodo} deleteTodo={deleteTodo} />
+       </div>
+    )
 }
 
-export default Todoitem;
-
+export default CreateTodo;

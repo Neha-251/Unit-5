@@ -1,81 +1,45 @@
-import React from "react";
-import { TodoList } from "./todoList";
-import { useState } from "react";
-import swal from "sweetalert";
+import {useState} from "react"
+import {Todolist} from "./Todolist"
+import { TodoItem } from "./TodoItem";
+import {nanoid} from "nanoid"
 
-const CreateTodo = () => {
+const ToDo = () => {
 
-    const [todo, setTodo] = useState({title: "", done: false})
-    const [todoArr, setTodoArr] = useState([])
-
-    let todos = localStorage.hasOwnProperty("todos")? JSON.parse(localStorage.getItem("todos")): []
-
-    const onchange = (e) => {
-        let {value} = e.target;
-        let obj = {};
-        obj["title"] = value;
-        obj["done"] = false;
-        setTodo(obj);
-    }
-    
-   
-    const createTodo = (e) => {
-        const {name} = e.target;
-
-        if(e.key === "Enter" || name === "addTodo"){
-            if(todo.title !== ""){
-                
-                todos.unshift(todo);
-                localStorage.setItem("todos", JSON.stringify(todos));
-                setTodo({ title: "", done: false})
-            }
-            else {
-                swal("Oops!, Please write a todo first", "error")
-            }
+    const [todoArr, setArr] = useState([]);
+    // console.log(todoArr);
+    const getData = (data) => {
+        const dataObj = {
+            title:data,
+            status:false,
+            id:nanoid(6)
         }
+        // console.log("received",data);
+        setArr([...todoArr, dataObj]);
     }
 
-    const completeTodo = (i) => {
-        if(todos[i]["done"] !== true) {
-            todos[i]["done"] = true;
-            localStorage.setItem("todos", JSON.stringify(todos));
-            setTodoArr(todos)
-            swal("Good job!", "Todo Completed", "success");
-        }
+    const handle = (id) => {
+        // console.log(id)
+        setArr(
+            todoArr.map((elem) => (elem.id === id? {...elem, status: !elem.status}:elem))
+        );
+
     }
 
 
-    const deleteTodo = (i) => {
-        swal({
+  return (
+    <div style={{
+        border:"2px solid red"
+    }}>
+        <Todolist getData={getData}/>
+        {todoArr.map((elem) =>{
+            
+            return (  
+                <TodoItem handle={handle} item={elem}></TodoItem>
+            )
+        })}
 
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover it",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then(res=> {
-            if(res) {
-                todos.splice(i, 1)
-                localStorage.setItem("todos", JSON.stringify(todos));
-                setTodoArr(todos)
-            }
-        })
-    }
-
-    return (
-       <div className="box">
-           <div className="text-end">
-               <h2>React Todo App</h2>
-               <h4>Add a New Todo</h4>
-           </div>
-
-           <div className="text-addTodo">
-               <input type="text" name="todo" value={todo.title} onKeyPress={createTodo} onChange={onchange} placeholder="Add a new Todo"/>
-               <button className="btn" name="addTodo" onClick={createTodo}>Add</button>
-           </div>
-           <TodoList todoArr={todoArr} completeTodo={completeTodo} deleteTodo={deleteTodo} />
-       </div>
-    )
+    </div>
+  );
 }
 
-export default CreateTodo;
+export {ToDo};
